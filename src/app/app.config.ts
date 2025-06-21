@@ -5,6 +5,8 @@ import {provideHttpClient, withFetch, withInterceptors} from '@angular/common/ht
 
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import {jwtInterceptor} from './core/auth/auth-interceptor';
+
 
 
 export const appConfig: ApplicationConfig = {
@@ -13,6 +15,8 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     provideAnimations(), provideCharts(withDefaultRegisterables()),
     provideCharts(withDefaultRegisterables()),
-    provideHttpClient(withFetch())
+    provideHttpClient(withInterceptors([
+     jwtInterceptor
+    ]))
   ]
 };

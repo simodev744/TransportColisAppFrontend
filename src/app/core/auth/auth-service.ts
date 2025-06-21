@@ -52,4 +52,8 @@ export class AuthService {
   getToken() {
     return localStorage.getItem(this.tokenKey);
   }
+
+    hasRole(role: string): boolean {
+        return localStorage.getItem(this.roleKey)=== role;
+    }
 }

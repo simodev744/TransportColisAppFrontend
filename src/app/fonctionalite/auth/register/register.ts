@@ -1,4 +1,4 @@
-// src/app/features/auth/register.component.ts
+
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
@@ -44,7 +44,12 @@ export class RegisterComponent {
     if (this.form.valid) {
       const { nom, email, motDePasse, role } = this.form.value;
       this.auth.register(nom!, email!, motDePasse!, role!).subscribe({
-        next: () => this.router.navigate(['/']),
+        next: () =>{
+
+          this.router.navigate(['/home'])
+
+        }
+        ,
         error: () => this.error = 'Erreur lors de l\'inscription'
       });
     }

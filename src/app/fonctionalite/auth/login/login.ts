@@ -1,4 +1,4 @@
-// src/app/features/auth/login.component.ts
+
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
@@ -33,12 +33,11 @@ export class LoginComponent {
   error = '';
 
 
-
   onSubmit() {
     if (this.form.valid) {
       const { email, motDePasse } = this.form.value;
       this.auth.login(email!, motDePasse!).subscribe({
-        next: () => this.router.navigate(['/']),
+        next: () => this.router.navigate(['/home']),
         error: () => this.error = 'Email ou mot de passe invalide'
       });
     }

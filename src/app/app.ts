@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {BehaviorSubject, map, Observable, of, Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 
 
@@ -16,6 +15,7 @@ import {HttpClient} from '@angular/common/http';
 export class App {
 
   constructor(private http:HttpClient) {
+
   }
 
 
