@@ -35,9 +35,24 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.form.valid) {
+      this.auth.logout();
       const { email, motDePasse } = this.form.value;
       this.auth.login(email!, motDePasse!).subscribe({
-        next: () => this.router.navigate(['/home']),
+        next: () =>
+        {
+          if (this.auth.hasRole("ADMINISTRATEUR")){
+            this.router.navigate(['/admin'])
+          }
+          else if (this.auth.hasRole("EXPEDITEUR")){
+            this.router.navigate(['/expediteur'])
+          }
+          else if (this.auth.hasRole("CONDUCTEUR")){
+            this.router.navigate(['/conducteur'])
+          }
+        }
+         ,
+
+
         error: () => this.error = 'Email ou mot de passe invalide'
       });
     }

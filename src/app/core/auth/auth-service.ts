@@ -46,7 +46,7 @@ export class AuthService {
     localStorage.removeItem(this.roleKey);
     this.isLoggedIn.set(false);
     this.role.set('');
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/login']);
   }
 
   getToken() {

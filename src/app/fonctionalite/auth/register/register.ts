@@ -42,11 +42,20 @@ export class RegisterComponent {
 
   onSubmit() {
     if (this.form.valid) {
+      this.auth.logout();
       const { nom, email, motDePasse, role } = this.form.value;
       this.auth.register(nom!, email!, motDePasse!, role!).subscribe({
         next: () =>{
 
-          this.router.navigate(['/home'])
+            if (this.auth.hasRole("ADMINISTRATEUR")){
+              this.router.navigate(['/admin'])
+            }
+            else if (this.auth.hasRole("EXPEDITEUR")){
+              this.router.navigate(['/expediteur'])
+            }
+            else if (this.auth.hasRole("CONDUCTEUR")){
+              this.router.navigate(['/conducteur'])
+            }
 
         }
         ,
