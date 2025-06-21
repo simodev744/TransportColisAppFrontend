@@ -11,7 +11,7 @@ import {DashboardConducteur} from './fonctionalite/conducteur/dashboard-conducte
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'home', component: Home,canActivate:[authGuard,RoleGuard], data: { role: 'ADMINISTRATEUR' } },
+  { path: 'home', component: Home},
   { path: 'expediteur', component: DashboardExpediteur,canActivate:[authGuard,RoleGuard], data: { role: 'EXPEDITEUR' } },
   { path: 'admin', component: DashboardAdmin,canActivate:[authGuard,RoleGuard], data: { role: 'ADMINISTRATEUR' } },
   { path: 'conducteur', component: DashboardConducteur,canActivate:[authGuard,RoleGuard], data: { role: 'CONDUCTEUR' } },
