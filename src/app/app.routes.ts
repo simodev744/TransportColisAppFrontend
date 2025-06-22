@@ -13,10 +13,16 @@ import {ConducteurModule} from './fonctionalite/conducteur/conducteur-module';
 
 export const routes: Routes = [
   { path: 'home', component: Home},
-  { path: 'expediteur', component: DashboardExpediteur,canActivate:[authGuard,RoleGuard], data: { role: 'EXPEDITEUR' } },
-  { path: 'admin', component: DashboardAdmin,canActivate:[authGuard,RoleGuard], data: { role: 'ADMINISTRATEUR' } },
-  { path: 'admin', component: DashboardAdmin,canActivate:[authGuard,RoleGuard], data: { role: 'ADMINISTRATEUR' } },
-  { path: 'admin', component: DashboardAdmin,canActivate:[authGuard,RoleGuard], data: { role: 'ADMINISTRATEUR' } },
+  { path: 'expediteur',
+    loadChildren:()=>import('./fonctionalite/expediteur/expediteur-module')
+      .then(m=>m.ExpediteurModule ),
+
+    canActivate:[authGuard,RoleGuard], data: { role: 'EXPEDITEUR' } },
+
+
+  { path: 'admin',
+     loadChildren:()=>import('./fonctionalite/admin/admin-module').then(m=>m.AdminModule),
+    canActivate:[authGuard,RoleGuard], data: { role: 'ADMINISTRATEUR' } },
 
   { path: 'conducteur',
     loadChildren:()=>import('./fonctionalite/conducteur/conducteur-module')
