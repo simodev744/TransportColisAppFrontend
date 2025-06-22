@@ -25,7 +25,9 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "public/bootstrap.min.css"
+
             ]
           },
           "configurations": {

@@ -65,9 +65,8 @@ export class AuthService {
       }
 
     hasRole(role: string): boolean {
-        return this.getEmailfromJwt()=== role;
+        return this.getRolefromJwt()=== role;
     }
-
 
     getRolefromJwt(){
         const decoded: any = jwtDecode(<any>localStorage.getItem(this.tokenKey));
@@ -75,11 +74,11 @@ export class AuthService {
         return role;
     }
 
-    getEmailfromJwt(){
-        const decoded: any = jwtDecode(<any>localStorage.getItem(this.tokenKey));
-        let email: string = decoded.sub || '';
-        return email;
-    }
+        getEmailfromJwt(){
+            const decoded: any = jwtDecode(<any>localStorage.getItem(this.tokenKey));
+            let email: string = decoded.sub || '';
+            return email;
+        }
 
 
 

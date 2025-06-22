@@ -8,14 +8,7 @@ import {AuthService} from '../../../core/auth/auth-service';
   templateUrl: './dashboard-expediteur.html',
   styleUrl: './dashboard-expediteur.css'
 })
-export class DashboardExpediteur implements OnInit{
-  ngOnInit(): void {
-      console.log(this.authservice.decodejwt());
-  }
-
-  private authservice=inject(AuthService);
-
-
+export class DashboardExpediteur {
 
 
 }
