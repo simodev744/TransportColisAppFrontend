@@ -2,15 +2,15 @@ import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { AdminService } from '../../../core/admin/admin-service';
 import { CommonModule } from '@angular/common';
-import {AdminNav} from '../admin-nav/admin-nav';
+
 import {RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-admin',
   standalone: true,
-  imports: [CommonModule, AdminNav, RouterOutlet],
+  imports: [CommonModule,RouterOutlet],
   template: `
-    <app-admin-nav></app-admin-nav>
+
     <div><router-outlet></router-outlet></div>
     <div class="dashboard-container">
       <h1 class="dashboard-title">Admin Dashboard</h1>
@@ -30,7 +30,7 @@ import {RouterOutlet} from '@angular/router';
               </svg>
             </div>
             <div class="stat-info">
-              <h3>Total Users</h3>
+              <h3>Total Utilisateurs</h3>
               <p>{{ stats.totalUtilisateurs }}</p>
             </div>
           </div>
@@ -43,7 +43,7 @@ import {RouterOutlet} from '@angular/router';
               </svg>
             </div>
             <div class="stat-info">
-              <h3>Total Ads</h3>
+              <h3>Total Annonces </h3>
               <p>{{ stats.totalAnnonces }}</p>
             </div>
           </div>
@@ -55,7 +55,7 @@ import {RouterOutlet} from '@angular/router';
               </svg>
             </div>
             <div class="stat-info">
-              <h3>Acceptance Rate</h3>
+              <h3>Taux Acceptation</h3>
               <p>{{ stats.tauxAcceptation }}%</p>
             </div>
           </div>
@@ -67,7 +67,7 @@ import {RouterOutlet} from '@angular/router';
               </svg>
             </div>
             <div class="stat-info">
-              <h3>Active Users</h3>
+              <h3>utilisateurs Actifs</h3>
               <p>{{ stats.utilisateursActifs }}</p>
             </div>
           </div>
@@ -234,7 +234,6 @@ export class DashboardAdmin implements OnInit, OnDestroy {
   }
 
   initCharts(): void {
-    // Destroy existing charts if they exist
     if (this.chart1) this.chart1.destroy();
     if (this.chart2) this.chart2.destroy();
 
@@ -244,12 +243,12 @@ export class DashboardAdmin implements OnInit, OnDestroy {
       this.chart1 = new Chart(barCtx, {
         type: 'bar',
         data: {
-          labels: ['Total Users', 'Total Ads', 'Acceptance Rate', 'Active Users'],
+          labels: ['totalUtilisateurs', 'totalUtilisateurs', 'tauxAcceptation', 'utilisateursActifs'],
           datasets: [{
             label: 'Statistics',
             data: [
               this.stats.totalUtilisateurs,
-              this.stats.totalAnnonces,
+              this.stats.totalUtilisateurs,
               this.stats.tauxAcceptation,
               this.stats.utilisateursActifs
             ],
@@ -313,7 +312,7 @@ export class DashboardAdmin implements OnInit, OnDestroy {
       this.chart2 = new Chart(pieCtx, {
         type: 'doughnut',
         data: {
-          labels: ['Total Users', 'Total Ads', 'Active Users'],
+          labels: ['totalUtilisateurs', 'totalAnnonces', 'utilisateursActifs'],
           datasets: [{
             data: [
               this.stats.totalUtilisateurs,

@@ -38,13 +38,13 @@ import {AnnonceDTO, AnnonceService} from '../../../core/conducteur/conducteur-se
   styles: []
 })
 export class ListeAnnoncesCondcuteur implements OnInit {
-  conducteurId: number = 1; // Valeur par défaut
+  conducteurId: number = 1;
   annonces: AnnonceDTO[] = [];
 
   constructor(private annonceService: AnnonceService) {}
 
   ngOnInit() {
-    this.loadAnnonces(); // Charger par défaut
+    this.loadAnnonces();
   }
 
   loadAnnonces() {
