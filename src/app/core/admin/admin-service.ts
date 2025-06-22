@@ -47,5 +47,14 @@ export class AdminService  {
  }
 
 
+  updateAnnonce(id: number, editAnnonceData: Annonce) {
 
+    return this.http.patch<Annonce>(this.api+"/annonces/",{annonce:editAnnonceData,id:id});
+  }
+
+  addAnnonce(newAnnonce: Annonce) {
+
+    return this.http.post<Annonce[]>(this.api+"/annonces",{newAnnonce});
+
+  }
 }

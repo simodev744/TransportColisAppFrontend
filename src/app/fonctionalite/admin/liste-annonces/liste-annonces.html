@@ -1,1 +1,73 @@
-<p>liste-annonces works!</p>
+<h2>Liste des Annonces</h2>
+
+<!-- Formulaire d'ajout -->
+<form (ngSubmit)="addAnnonce()" #annonceForm="ngForm">
+  <input [(ngModel)]="newAnnonce.depart" name="depart" placeholder="Départ" required />
+  <input [(ngModel)]="newAnnonce.arrivee" name="arrivee" placeholder="Arrivée" required />
+  <input [(ngModel)]="newAnnonce.type" name="type" placeholder="Type" required />
+  <input [(ngModel)]="newAnnonce.capacite" name="capacite" placeholder="Capacité" required />
+  <input [(ngModel)]="newAnnonce.status" name="status" placeholder="Statut" required />
+  <input [(ngModel)]="newAnnonce.etapes" name="etapes" placeholder="Étapes séparées par virgule"
+         (blur)="newAnnonce.etapes = newAnnonce.etapes.toString().split(',')" />
+  <input [(ngModel)]="newAnnonce.conducteurId" name="conducteurId" placeholder="ID Conducteur" required type="number" />
+  <button type="submit">Ajouter</button>
+</form>
+
+<hr />
+
+<!-- Liste paginée -->
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Départ</th>
+    <th>Étapes</th>
+    <th>Arrivée</th>
+    <th>Type</th>
+    <th>Capacité</th>
+    <th>Status</th>
+    <th>Conducteur</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let annonce of pagedAnnonces">
+    <ng-container *ngIf="editAnnonceData?.id !== annonce.id; else editForm">
+      <td>{{ annonce.id }}</td>
+      <td>{{ annonce.depart }}</td>
+      <td>{{ annonce.etapes.join(', ') }}</td>
+      <td>{{ annonce.arrivee }}</td>
+      <td>{{ annonce.type }}</td>
+      <td>{{ annonce.capacite }}</td>
+      <td>{{ annonce.status }}</td>
+      <td>{{ annonce.conducteurId }}</td>
+      <td>
+        <button (click)="startEdit(annonce)">Modifier</button>
+        <button (click)="deleteAnnonce(annonce.id!)">Supprimer</button>
+      </td>
+    </ng-container>
+
+    <ng-template #editForm>
+      <td>{{ editAnnonceData.id }}</td>
+      <td><input [(ngModel)]="editAnnonceData.depart" /></td>
+      <td><input [(ngModel)]="editAnnonceData.etapes" (blur)="editAnnonceData.etapes = editAnnonceData.etapes.toString().split(',')" /></td>
+      <td><input [(ngModel)]="editAnnonceData.arrivee" /></td>
+      <td><input [(ngModel)]="editAnnonceData.type" /></td>
+      <td><input [(ngModel)]="editAnnonceData.capacite" /></td>
+      <td><input [(ngModel)]="editAnnonceData.status" /></td>
+      <td><input [(ngModel)]="editAnnonceData.conducteurId" type="number" /></td>
+      <td>
+        <button (click)="updateAnnonce()">Enregistrer</button>
+        <button (click)="cancelEdit()">Annuler</button>
+      </td>
+    </ng-template>
+  </tr>
+  </tbody>
+</table>
+
+<!-- Pagination -->
+<div>
+  <button (click)="prevPage()" [disabled]="currentPage === 1">⬅ Précédent</button>
+  <span>Page {{ currentPage }}</span>
+  <button (click)="nextPage()" [disabled]="currentPage * pageSize >= annonces.length">Suivant ➡</button>
+</div>
